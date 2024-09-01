@@ -175,16 +175,21 @@ class Calendar(ft.Container):
                 holidays_list.append(data_dict)
             
             containers = []
+            today_date = datetime.now().date()
             if wd < 6:
                 days = wd + 1
                 sd = dt - timedelta(days=days)
                 for i in range(days):
-                    container = self.day_container(sd.date(), holidays_list)
+                    date = sd.date()
+                    is_today = date == today_date
+                    container = self.day_container(date, holidays_list, is_today)
                     containers.append(container)
                     items -= 1
                     sd += timedelta(days=1)
             while items > 0:
-                container = self.day_container(sd.date(), holidays_list)
+                date = sd.date()
+                is_today = date == today_date
+                container = self.day_container(date, holidays_list, is_today)
                 containers.append(container)
                 items -= 1
                 sd += timedelta(days=1)
@@ -196,7 +201,8 @@ class Calendar(ft.Container):
 
     def day_container(self,
                       date: date,
-                      holidays_list: List[dict]) -> ft.Container:
+                      holidays_list: List[dict],
+                      is_today: bool) -> ft.Container:
         month = date.month
         weekday = date.weekday()
         items = utils.search_by_key(holidays_list, "date", date)
@@ -208,7 +214,10 @@ class Calendar(ft.Container):
             italic=True
         )
 
-        if weekday >= 5: # Saturday or sunday
+        if is_today:
+            text_color = ft.colors.BLACK
+            bgcolor = ft.colors.TEAL_300
+        elif weekday >= 5: # Saturday or sunday
             text_color = ft.colors.WHITE
             bgcolor = ft.colors.GREY_600 \
                 if month == self.month \
@@ -251,6 +260,7 @@ class Calendar(ft.Container):
                             color=text_color,
                             style=day_style)
             ]
+        
         container = ft.Container(
             content=ft.Column(controls=controls),
             bgcolor=bgcolor,
