@@ -21,4 +21,4 @@ Lactec's calendar Python's Flet Project
 
 ## Flet
 * [Python powered by Flutter | Flet - official website](https://flet.dev/)
-* [Greate Flet Course: Flet 360](https://programadoraventureiro.com/flet/)
+* [Great Flet Course: Flet 360](https://programadoraventureiro.com/flet/)
