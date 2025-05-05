@@ -15,7 +15,7 @@ class AppBar(ft.AppBar):
         self.change_city = change_city
         self.exit_app = exit_app
         self.theme_icon = theme_icon
-        self.bgcolor=ft.colors.SURFACE_VARIANT
+        self.bgcolor=ft.Colors.WHITE10
 
         cities = []
         with db.session_scope() as session:
@@ -63,7 +63,7 @@ class AppBar(ft.AppBar):
             )
         self.leading = leading
         self.title = ft.Dropdown(
-            icon=ft.icons.APPS,
+            icon=ft.Icons.APPS,
             options=options,
             width=250,
             value=self.city_id,
@@ -76,19 +76,19 @@ class AppBar(ft.AppBar):
                 on_click=self.change_theme
             ),
             ft.IconButton(
-                ft.icons.INFO,
+                ft.Icons.INFO,
                 on_click=self.on_about
             ),
             ft.PopupMenuButton(
                 items=[
                     ft.PopupMenuItem(
                         'Repositório',
-                        icon=ft.icons.CODE_OUTLINED,
+                        icon=ft.Icons.CODE_OUTLINED,
                         on_click=lambda _: self.page.launch_url(repository_url)
                     ),
                     # ft.PopupMenuItem(
                     #     'Sair',
-                    #     icon=ft.icons.EXIT_TO_APP,
+                    #     icon=ft.Icons.EXIT_TO_APP,
                     #     on_click=self.exit_app
                     # ),
                 ]

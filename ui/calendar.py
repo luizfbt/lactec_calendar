@@ -35,7 +35,7 @@ class Calendar(ft.Container):
             content=ft.Container(
                 content=ft.Row(
                     controls=[
-                        ft.ProgressRing(color=ft.colors.ORANGE),
+                        ft.ProgressRing(color=ft.Colors.ORANGE),
                         ft.Text("Carregando dados...")
                     ],
                     alignment=ft.MainAxisAlignment.CENTER
@@ -52,23 +52,23 @@ class Calendar(ft.Container):
         self.navigation = ft.Row(
             controls=[
                 ft.IconButton(
-                    ft.icons.KEYBOARD_DOUBLE_ARROW_LEFT,
+                    ft.Icons.KEYBOARD_DOUBLE_ARROW_LEFT,
                     on_click=self.on_previous_year,
                     tooltip="Ano anterior"
                 ),
                 ft.IconButton(
-                    ft.icons.KEYBOARD_ARROW_LEFT,
+                    ft.Icons.KEYBOARD_ARROW_LEFT,
                     on_click=self.on_previous_month,
                     tooltip="Mês anterior"
                 ),
                 self.year_month,
                 ft.IconButton(
-                    ft.icons.KEYBOARD_ARROW_RIGHT,
+                    ft.Icons.KEYBOARD_ARROW_RIGHT,
                     on_click=self.on_next_month,
                     tooltip="Próximo mês"
                 ),
                 ft.IconButton(
-                    ft.icons.KEYBOARD_DOUBLE_ARROW_RIGHT,
+                    ft.Icons.KEYBOARD_DOUBLE_ARROW_RIGHT,
                     on_click=self.on_next_year,
                     tooltip="Próximo ano"
                 ),
@@ -85,9 +85,9 @@ class Calendar(ft.Container):
         for i in indexes:
             containers.append(ft.Container(
                 content=ft.Text(weeks[i][:3].upper(),
-                                color=ft.colors.TEAL_300,
+                                color=ft.Colors.TEAL_300,
                                 style=header_style),
-                bgcolor=ft.colors.BLACK,
+                bgcolor=ft.Colors.BLACK,
                 border_radius=10,
                 border=ft.border.all(1, 'white'),
                 alignment=ft.alignment.center)
@@ -209,21 +209,21 @@ class Calendar(ft.Container):
         )
 
         if weekday >= 5: # Saturday or sunday
-            text_color = ft.colors.WHITE
-            bgcolor = ft.colors.GREY_600 \
+            text_color = ft.Colors.WHITE
+            bgcolor = ft.Colors.GREY_600 \
                 if month == self.month \
-                else ft.colors.GREY_400
+                else ft.Colors.GREY_400
         else:
             if is_holiday:
-                text_color = ft.colors.WHITE
-                bgcolor = ft.colors.BLUE_ACCENT_400 \
+                text_color = ft.Colors.WHITE
+                bgcolor = ft.Colors.BLUE_ACCENT_400 \
                     if month == self.month \
-                    else ft.colors.BLUE_ACCENT_100
+                    else ft.Colors.BLUE_ACCENT_100
             else:
-                text_color = ft.colors.BLACK
-                bgcolor = ft.colors.TEAL_50 \
+                text_color = ft.Colors.BLACK
+                bgcolor = ft.Colors.TEAL_50 \
                     if month == self.month \
-                    else ft.colors.GREY_100
+                    else ft.Colors.GREY_100
 
         if month == self.month:
             day_style = ft.TextStyle(

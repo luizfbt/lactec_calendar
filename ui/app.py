@@ -53,8 +53,8 @@ class App:
 
     def theme_icon(self):
         if self.page.theme_mode == ft.ThemeMode.DARK:
-            return ft.icons.LIGHT_MODE
-        return ft.icons.DARK_MODE
+            return ft.Icons.LIGHT_MODE
+        return ft.Icons.DARK_MODE
 
 
     def change_theme(self, e):

@@ -20,4 +20,4 @@ def test():
 if __name__ == '__main__':
     # test()
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
-    ft.app(App, assets_dir="assets", port=8080, view=ft.AppView.FLET_APP_WEB)
+    ft.app(App, assets_dir="assets") #, port=8080, view=ft.AppView.FLET_APP_WEB)
