@@ -1,0 +1,27 @@
+[project]
+name = "lactec-calendar"
+version = "0.1.0"
+description = "Calendário adaptado ao Lactec"
+authors = [
+    {name = "Luiz Fernando Brum Teixeira",email = "brumteixeira@gmail.com"}
+]
+license = {text = "MIT"}
+readme = "README.md"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "numpy (>=2.4.0,<3.0.0)",
+    "pandas (>=2.3.3,<3.0.0)",
+    "xlrd (>=2.0.2,<3.0.0)",
+    "openpyxl (>=3.1.5,<4.0.0)",
+    "xlsxwriter (>=3.2.9,<4.0.0)",
+    "sqlalchemy (>=2.0.45,<3.0.0)",
+    "flet (>=0.80.1,<0.81.0)",
+    "pprintpp (>=0.4.0,<0.5.0)"
+]
+
+[tool.poetry]
+package-mode = false
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
