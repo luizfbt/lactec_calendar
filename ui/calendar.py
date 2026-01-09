@@ -83,14 +83,15 @@ class Calendar(ft.Container):
             )
         indexes = [6, 0, 1, 2, 3, 4, 5]
         for i in indexes:
-            containers.append(ft.Container(
-                content=ft.Text(weeks[i][:3].upper(),
-                                color=ft.Colors.TEAL_300,
-                                style=header_style),
-                bgcolor=ft.Colors.BLACK,
-                border_radius=10,
-                border=ft.border.all(1, 'white'),
-                alignment=ft.alignment.center)
+            containers.append(
+                ft.Container(
+                    content=ft.Text(weeks[i][:3].upper(),
+                                    color=ft.Colors.TEAL_300,
+                                    style=header_style),
+                    bgcolor=ft.Colors.BLACK,
+                    border_radius=10,
+                    border=ft.border.all(1, 'white'),
+                    alignment=ft.Alignment.CENTER)
             )
 
         self.gridview_header = ft.GridView(
