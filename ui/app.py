@@ -84,17 +84,17 @@ class App:
 
 
     def main_page(self):
-        self.page.appbar = AppBar(
-            self.change_theme,
-            self.change_city,
-            self.exit_app,
-            self.theme_icon)
-
         dt = datetime.now()
 
         self.calendar = Calendar(dt.year,
                                  dt.month,
                                  self.city_id,
                                  self.has_adm_decisions)
-        
+
+        self.page.appbar = AppBar(
+            self.change_theme,
+            self.change_city,
+            self.exit_app,
+            self.theme_icon)
+
         self.page.add(self.calendar)
