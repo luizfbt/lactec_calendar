@@ -28,16 +28,16 @@ class AppBar(ft.AppBar):
                                "has_adm_decisions": reg.has_adm_decisions})
         self.cities = cities
 
-        lactec_url = "https://lactec.com.br/"
-        repository_url = "https://github.com/luizfbt/lactec_calendar"
-        
+        self.lactec_url = "https://lactec.com.br/"
+        self.repository_url = "https://github.com/luizfbt/lactec_calendar"
+
         image = ft.Image(
             src=f"images/lacteclogo.png",
             width=20,
             height=20,
-            fit=ft.ImageFit.CONTAIN
+            fit="contain"
         )
-        
+
         leading = ft.Container(
             ft.Row(
                 [
@@ -46,29 +46,28 @@ class AppBar(ft.AppBar):
                 ],
                 spacing=5
             ),
-            on_click=lambda _: self.page.launch_url(lactec_url)
+            on_click=self.open_lactec_url
         )
 
         options = []
-        dropdown_style = ft.TextStyle(
-            size=20,
-            weight=ft.FontWeight.BOLD
-        )
-        for i, city in enumerate(cities, 1):
+        current_city_name = None
+        for city in cities:
+            if city['id'] == self.city_id:
+                current_city_name = city['name']
             options.append(
-                ft.dropdown.Option(key=i,
-                                   text=city['name'],
-                                   alignment=ft.alignment.center,
-                                   text_style=dropdown_style)
+                ft.DropdownOption(
+                    key=city['name'],
+                    text=city['name']
+                )
             )
         self.leading = leading
-        self.title = ft.Dropdown(
-            icon=ft.Icons.APPS,
+        dropdown = ft.Dropdown(
             options=options,
             width=250,
-            value=self.city_id,
-            on_change=self.on_change_city
+            value=current_city_name
         )
+        dropdown.on_change = self.on_change_city
+        self.title = dropdown
         self.center_title = True
         self.actions = [
             ft.IconButton(
@@ -84,7 +83,7 @@ class AppBar(ft.AppBar):
                     ft.PopupMenuItem(
                         'Repositório',
                         icon=ft.Icons.CODE_OUTLINED,
-                        on_click=lambda _: self.page.launch_url(repository_url)
+                        on_click=self.open_repository_url
                     ),
                     # ft.PopupMenuItem(
                     #     'Sair',
@@ -121,7 +120,7 @@ class AppBar(ft.AppBar):
                 value=markdown,
                 selectable=True,
                 extension_set=ft.MarkdownExtensionSet.GITHUB_WEB,
-                on_tap_link=lambda e: self.page.launch_url(e.data),
+                on_tap_link=self.open_markdown_link,
                 code_theme='atom-one-light'
             )
             
@@ -138,13 +137,32 @@ class AppBar(ft.AppBar):
 
     def on_change_city(self, e: ft.ControlEvent):
         control: ft.Dropdown = e.control
-        idx = int(control.value) - 1
-        self.change_city(self.cities[idx])
+        city_name = control.value
+        for city in self.cities:
+            if city['name'] == city_name:
+                self.change_city(city)
+                break
 
 
     def on_about(self, e: ft.ControlEvent):
-        self.page.open(self.dlg)
+        if self.dlg not in self.page.overlay:
+            self.page.overlay.append(self.dlg)
+        self.dlg.open = True
+        self.page.update()
 
 
     def on_close_dlg(self, e: ft.ControlEvent):
-        self.page.close(self.dlg)
+        self.dlg.open = False
+        self.page.update()
+
+
+    async def open_lactec_url(self, _):
+        await self.page.launch_url(self.lactec_url)
+
+
+    async def open_repository_url(self, _):
+        await self.page.launch_url(self.repository_url)
+
+
+    async def open_markdown_link(self, e: ft.ControlEvent):
+        await self.page.launch_url(e.data)
