@@ -4,6 +4,8 @@ from ui.app import *
 import flet as ft
 import locale
 import pandas as pd
+import asyncio
+import sys
 
 
 def test():
@@ -19,5 +21,12 @@ def test():
 
 if __name__ == '__main__':
     # test()
+
+    # Suppress harmless Windows asyncio connection reset errors
+    if sys.platform == 'win32':
+        import logging
+        # Suppress the specific asyncio error from logs
+        logging.getLogger('asyncio').setLevel(logging.CRITICAL)
+
     locale.setlocale(locale.LC_ALL, 'pt_BR.UTF-8')
     ft.run(App, assets_dir="assets") #, port=8080, view=ft.AppView.FLET_APP_WEB)
